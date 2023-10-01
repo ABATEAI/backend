@@ -132,7 +132,7 @@ venv.bak/
 .spyderproject
 .spyproject
 
-# Rope project settings (Python mode for VIim)
+# Rope project settings (Python mode for Vim)
 .ropeproject
 
 # Vim swap files
