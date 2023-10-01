@@ -1,7 +1,18 @@
+# Git
+.git
+.gitignore
+.gitattributes
+.github/
+
+# Docker
+docker-compose.yml
+Dockerfile
+.docker
+.dockerignore
+
 # Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+**/__pycache__/
+**/*.py[cod]
 
 # C extensions
 *.so
@@ -132,7 +143,7 @@ venv.bak/
 .spyderproject
 .spyproject
 
-# Rope project settings (Python mode for Vim)
+# Rope project settings (Python mode for VIim)
 .ropeproject
 
 # Vim swap files
