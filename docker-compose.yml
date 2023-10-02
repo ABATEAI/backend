@@ -5,20 +5,29 @@
 # - https://fastapi.tiangolo.com/deployment/docker/
 
 services:
-  google_api:
+  abateai_api:
     build: .
-    command: ["uvicorn app.google:gapp --host 0.0.0.0 --port 8000 --reload"]
+    command: ["uvicorn app.index:app --host 0.0.0.0 --port 8000 --reload"]
     restart: always
     volumes:
       - ./src:/usr/src/app
     ports:
       - 8000:8000
 
-  square_api:
-    build: .
-    command: ["uvicorn app.square:sapp --host 0.0.0.0 --port 8001 --reload"]
-    restart: always
-    volumes:
-      - ./src:/usr/src/app
-    ports:
-      - 8001:8001
+  # google_api:
+  #   build: .
+  #   command: ["uvicorn app.google:gapp --host 0.0.0.0 --port 8000 --reload"]
+  #   restart: always
+  #   volumes:
+  #     - ./src:/usr/src/app
+  #   ports:
+  #     - 8000:8000
+
+  # square_api:
+  #   build: .
+  #   command: ["uvicorn app.square:sapp --host 0.0.0.0 --port 8001 --reload"]
+  #   restart: always
+  #   volumes:
+  #     - ./src:/usr/src/app
+  #   ports:
+  #     - 8001:8001
