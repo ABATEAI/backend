@@ -13,6 +13,7 @@ Dockerfile
 # Byte-compiled / optimized / DLL files
 **/__pycache__/
 **/*.py[cod]
+**/*$py.class
 
 # C extensions
 *.so
@@ -175,3 +176,7 @@ cython_debug/
 
 # VS Code
 .vscode/
+
+# README and LICENSE
+README.md
+LICENSE
