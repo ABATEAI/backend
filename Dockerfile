@@ -12,17 +12,13 @@ COPY requirements.txt ./
 # Install dependencies
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
-# Ports for uvicorn
-EXPOSE 8000 8001
-
 # Copy local src directory content
 COPY src/ ./app
 
 # Set labels
 LABEL vendor1="ABATE AI"
-LABEL com.abateai.version.is-production="false"
-LABEL com.abateai.release-date="2023-09-30"
-LABEL com.abateai.version="1.0.0"
+LABEL com.abateai.release-date="2023-10-01"
+LABEL com.abateai.version="1.0.1"
 
 # Use default entrypoint
 ENTRYPOINT [ "/bin/sh", "-c" ]
