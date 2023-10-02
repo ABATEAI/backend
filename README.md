@@ -21,24 +21,23 @@ $ git clone https://github.com/ABATEAI/backend.git
 ```
 
 Assuming you have installed Docker Desktop, open the application and sign in.
-Then build the Docker images for the ABATE AI backend APIs with `docker-compose`
+Then build the Docker image for the ABATE AI backend API with `docker-compose`
 
 ```bash
 $ docker-compose build
 ```
 
-Verify the images were created by running the following in a terminal
+Verify the image was created by running the following in a terminal
 
 ```bash
 $ docker image ls
 REPOSITORY                      TAG         IMAGE ID       CREATED        SIZE
-backend-square_api              latest      some_hash_01   1 minute ago   1.16GB
-backend-google_api              latest      some_hash_02   1 minute ago   1.16GB
+backend-abateai_api             latest      some_hash_01   1 minute ago   1.16GB
 ```
 
 ### Development
 
-ABATE AI's APIs build off the Google Vertex AI API and Square APIs.
+ABATE AI's API builds off the Google Vertex AI API and Square APIs.
 The following links can be referenced during development.
 
 - Square Python SDK: https://pypi.org/project/squareup/
@@ -50,28 +49,25 @@ The following links can be referenced during development.
 - Timeseries Insights API Overview:
   https://cloud.google.com/timeseries-insights/docs/overview
 
-The development servers for the Google and Square-based APIs are started with
+The development server is started with
 
 ```bash
 $ docker-compose up -d
 ```
 
-Responses from the ABATE AI API based on Google Vertex AI that are viewable can
-be seen at `http://localhost:8000/api/<google_api_path>`.
+Responses from the ABATE AI API that are viewable can be seen at
+`http://localhost:8000/api/<api_path>`.
 
-Similarly, responses from the ABATE AI API based on the Square API that are
-viewable can be seen at `http://localhost:8001/api/<square_api_path>`
+Any changes to [src/index.py](src/index.py) will show up in the browser
+(if viewable) after refreshing.
 
-Any changes to [src/google.py](src/google.py) and [src/square.py](src/square.py)
-will show up in the browser (if viewable) after refreshing.
-
-Once you are done with development, shut down the development servers with
+Once you are done with development, shut down the development server with
 
 ```bash
 $ docker-compose down
 ```
 
-and quit Docker Desktop (don't just exit, ensure the engine has stopped).
+and quit Docker Desktop (don't just exit, ensure you power down the engine).
 
 ### Suggestions
 
