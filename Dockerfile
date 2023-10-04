@@ -3,6 +3,9 @@
 # Set base image, has Python 3.11.5 and pip 23.2.1
 FROM python:3.11.5 AS builder
 
+# Allow statements and log messages to immediately appear in the logs
+ENV PYTHONUNBUFFERED True
+
 # Set working directory in container
 WORKDIR /usr/src
 
@@ -17,11 +20,11 @@ COPY src/ ./app
 
 # Set labels
 LABEL vendor1="ABATE AI"
-LABEL com.abateai.release-date="2023-10-01"
-LABEL com.abateai.version="1.0.1"
+LABEL com.abateai.release-date="2023-10-04"
+LABEL com.abateai.version="1.0.2"
 
-# Use default entrypoint
-ENTRYPOINT [ "/bin/sh", "-c" ]
+# If running behind a proxy like Nginx or Traefik add --proxy-headers
+CMD ["bash", "-c", "uvicorn app.index:app --host 0.0.0.0 --port ${PORT:-8000}"]
 
 # # Following instructions are for slimming down image
 # # See https://www.docker.com/blog/containerized-python-development-part-1/
