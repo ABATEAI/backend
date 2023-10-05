@@ -7,7 +7,7 @@
 services:
   abateai_api:
     build: .
-    command: ["uvicorn app.index:app --host 0.0.0.0 --port 8000 --reload"]
+    command: ["sh", "-c", "uvicorn app.index:app --host 0.0.0.0 --port 8000 --reload"]
     restart: always
     volumes:
       - ./src:/usr/src/app
