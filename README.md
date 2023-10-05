@@ -14,10 +14,11 @@ Backend Python API source code for abateai.com
 
 ### Installation
 
-First, clone the repo with
+First, clone the repo and change directory into it with
 
 ```bash
 $ git clone https://github.com/ABATEAI/backend.git
+$ cd backend
 ```
 
 Assuming you have installed Docker Desktop, open the application and sign in.
@@ -55,13 +56,19 @@ The development server is started with
 $ docker-compose up -d
 ```
 
+You can also build and start the server with the combined command
+
+```bash
+$ docker-compose up -d --build
+```
+
 Responses from the ABATE AI API that are viewable can be seen at
 `http://localhost:8000/api/<api_path>`.
 
 Any changes to [src/index.py](src/index.py) will show up in the browser
 (if viewable) after refreshing.
 
-Once you are done with development, shut down the development server with
+Once you are done with development, shut down the server with
 
 ```bash
 $ docker-compose down
