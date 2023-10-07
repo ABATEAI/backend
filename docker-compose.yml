@@ -8,11 +8,20 @@ services:
   abateai_api:
     build: .
     command: ["sh", "-c", "uvicorn app.index:app --host 0.0.0.0 --port 8000 --reload"]
+    environment:
+      CONFIG_TOML_FILE: /run/secrets/config_toml
     restart: always
+    secrets:
+      - config_toml
     volumes:
       - ./src:/usr/src/app
     ports:
       - 8000:8000
+
+# Referenced https://docs.docker.com/compose/use-secrets/
+secrets:
+  config_toml:
+    file: config.toml
 
   # google_api:
   #   build: .
