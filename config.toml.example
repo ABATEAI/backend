@@ -1,0 +1,12 @@
+# Square examples use https://docs.python.org/3/library/configparser.html
+# but will use tomllib instead https://docs.python.org/3/library/tomllib.html
+# TOML explained at https://toml.io/en/
+
+title = "TOML Config For Square and Google APIs"
+
+[SQUARE_DEV]
+SQUARE_ACCESS_TOKEN = "square_access_token"
+SQUARE_APPLICATION_ID = "square_application_id"
+SQUARE_ENVIRONMENT = "sandbox"
+SQUARE_LOCATION_ID = "square_location_id"
+SQUARE_PAYMENT_FORM_URL = "https://sandbox.web.squarecdn.com/v1/square.js"
