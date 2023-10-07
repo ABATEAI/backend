@@ -25,8 +25,8 @@ Copy [config.toml.example](config.toml.example) and rename the copy to
 `config.toml`. Populate the configuration fields with development values.
 Please reach out to @jeffrylew for the specific values. Make sure `config.toml`
 does not get version controlled or added to GitHub! It has been added to
-[.gitignore](.gitignore) and [.dockerignore](.dockerignore) to avoid leaking
-credentials.
+[.gitignore](.gitignore), [.dockerignore](.dockerignore), and
+[.gcloudignore](.gcloudignore) to avoid leaking credentials.
 
 Assuming you have installed Docker Desktop, open the application and sign in.
 Then build the Docker image for the ABATE AI backend API with `docker-compose`
