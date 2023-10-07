@@ -66,9 +66,11 @@ if "CONFIG_TOML_FILE" in os.environ:
         except tomllib.TOMLDecodeError:
             print("[index.py] Error: config.toml is invalid")
         finally:
-            if (not square_access_token or
-                not square_environment or
-                not square_location_id):
+            if (
+                not square_access_token
+                or not square_environment
+                or not square_location_id
+            ):
                 print("[index.py] Retrieving configuration another way...")
 
 # Read configuration/credentials from environment variables
@@ -83,7 +85,7 @@ if not square_environment:
         square_environment = os.environ["SQUARE_ENVIRONMENT"]
     else:
         raise RuntimeError("[index.py] Unable to access SQUARE_ENVIRONMENT")
-    
+
 if not square_location_id:
     if "SQUARE_LOCATION_ID" in os.environ:
         square_location_id = os.environ["SQUARE_LOCATION_ID"]
@@ -91,9 +93,7 @@ if not square_location_id:
         raise RuntimeError("[index.py] Unable to access SQUARE_LOCATION_ID")
 
 
-square_client = Client(
-    access_token=square_access_token,
-    environment=square_environment)
+square_client = Client(access_token=square_access_token, environment=square_environment)
 
 
 @app.get("/api/google")
@@ -105,15 +105,15 @@ async def hello_google():
 async def hello_square():
     return {"status": "success", "message": "Hello Square"}
 
-@app.get("api/square/locations")
-async def get_locations():
+
+@app.get("/api/square/location")
+async def get_location():
     # Referenced
     # - https://developer.squareup.com/docs/sdks/python/quick-start
     # - https://github.com/square/connect-api-examples/blob/master
     #   /connect-examples/v2/python_payment/main.py
-    result = square_client.locations.retrieve_location(
-        location_id=square_location_id)
-    
+    result = square_client.locations.retrieve_location(location_id=square_location_id)
+
     if result.is_success():
         return result.body
     else:
