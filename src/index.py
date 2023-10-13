@@ -118,3 +118,70 @@ async def get_location():
         return result.body
     else:
         return result.errors
+
+
+@app.get("/api/square/list_catalog")
+async def get_list_catalog():
+    """Get all objects from catalog of main type ITEM, ITEM_OPTION, CATEGORY"""
+
+    # Referenced
+    # - https://developer.squareup.com/docs/catalog-api/retrieve-catalog-objects
+    result = square_client.catalog.list_catalog()
+
+    if result.is_success():
+        return result.body
+    else:
+        return result.errors
+
+
+@app.get("/api/square/catalog_objects")
+async def get_catalog_objects():
+    """Get catalog items with object_ids and related objects with type IMAGE"""
+
+    # Referenced
+    # - https://developer.squareup.com/explorer/square/catalog-api
+    #   /batch-retrieve-catalog-objects
+    result = square_client.catalog.batch_retrieve_catalog_objects(
+        body = {
+            "object_ids": [
+                "I5QQC4YOLNMYVZND75LRXRDE",
+                "TIQ4SQUZNQ4NNCVAJOLOAACG",
+                "CFIRRK6YQKM3SVGCGCBCZXHQ",
+                "QFKYKEHRLE4M7VVNFCYPFQTM",
+                "ZYZIRJRRLNCRLGDZCDIR3YWR",
+                "I3YN42OW5HWKPBDGHQMRQUB7",
+                "RWJ4KNA2A4JYNHW4J7DDXWFX",
+                "ETA5ZHNWBGJJF6237YGDBTU3",
+                "26OLJ6AWTE3D4BPRT7AJFE4L",
+                "QA2VV4SGFW7QQCWDGPBCXB6P",
+                "GAWGBZLSMM5CTOIB4DPAEYPJ",
+                "ZGU6HONP33W55ULW4IJKGCDB",
+                "MN64RZJZQC3H6AF4VSOSNLGN",
+                "WKSGU6KEK3U7PE3VZ42FD76Z",
+                "QOGEUQQ2NVLIVKCMEYRDI7RC",
+                "OTDQYQUMGRCTDERRWEBFEPJG",
+                "VHDYW7JO3SHX4AXO3M4GYAVX",
+                "L3MNZU5UVEMAIVTQR2BJR7FF",
+                "SO4DQXCQ3XZBWWZF3CMH7YBJ",
+                "47E7RO5Q25VWKTED4XTPNQ72",
+                "FU4XUWVLOZUU5XLTOKAIO3TI",
+                "CWRVJDCTEK6L4X7TMSUHEGUB",
+                "3QKF4LOA54QCY2422T2WNOVD",
+                "4LOUBTQZT6IATTSTWIJQEUW4",
+                "B377XDOQR7AZVBZW5TI4I3L6",
+                "V7UF5ZNSFRTVPL66D4Z37X4E",
+                "4E77G6M4D664ALW37VNPAP5K",
+                "XXOCCUKY33UG4LCEMYA6ETXB",
+                "SQRLCH2DEQKTXYMD6IQYJ7MY",
+                "JXYNKKUX5GFATHIYNZFGTO2P",
+                "5HPCLW3JYWH7MVFHRK3JDG3G",
+                "2E2727SDOEFX7L3CDGML2HNS"
+            ],
+            "include_related_objects": True,
+            "include_deleted_objects": False
+        })
+
+    if result.is_success():
+        return result.body
+    else:
+        return result.errors
