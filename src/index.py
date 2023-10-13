@@ -188,6 +188,29 @@ async def get_catalog_objects():
         return result.errors
 
 
+@app.get("/api/square/categories")
+async def get_catalog_categories():
+    """Get catalog objs of type CATEGORY (Chicken, Classic, Supreme, Veggie)"""
+
+    # Referenced
+    # - https://developer.squareup.com/explorer/square/catalog-api
+    #   /search-catalog-objects
+    result = square_client.catalog.search_catalog_objects(
+        body={
+            "object_types": [
+                "CATEGORY",
+            ],
+            "include_deleted_objects": False,
+            "include_related_objects": True,
+        }
+    )
+
+    if result.is_success():
+        return result.body
+    else:
+        return result.errors
+
+
 @app.get("/api/square/images")
 async def get_catalog_images():
     """Get catalog objects with type IMAGE"""
