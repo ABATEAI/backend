@@ -232,3 +232,26 @@ async def get_catalog_images():
         return result.body
     else:
         return result.errors
+
+
+@app.get("/api/square/sizes")
+async def get_catalog_sizes():
+    """Get catalog objects with type ITEM_OPTION (they specify pizza sizes)"""
+
+    # Referenced
+    # - https://developer.squareup.com/explorer/square/catalog-api
+    #   /search-catalog-objects
+    result = square_client.catalog.search_catalog_objects(
+        body={
+            "object_types": [
+                "ITEM_OPTION",
+            ],
+            "include_deleted_objects": False,
+            "include_related_objects": True,
+        }
+    )
+
+    if result.is_success():
+        return result.body
+    else:
+        return result.errors
