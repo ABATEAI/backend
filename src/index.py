@@ -177,8 +177,31 @@ async def get_catalog_objects():
                 "5HPCLW3JYWH7MVFHRK3JDG3G",
                 "2E2727SDOEFX7L3CDGML2HNS",
             ],
-            "include_related_objects": True,
             "include_deleted_objects": False,
+            "include_related_objects": True,
+        }
+    )
+
+    if result.is_success():
+        return result.body
+    else:
+        return result.errors
+
+
+@app.get("/api/square/images")
+async def get_catalog_images():
+    """Get catalog objects with type IMAGE"""
+
+    # Referenced
+    # - https://developer.squareup.com/explorer/square/catalog-api
+    #   /search-catalog-objects
+    result = square_client.catalog.search_catalog_objects(
+        body={
+            "object_types": [
+                "IMAGE",
+            ],
+            "include_deleted_objects": False,
+            "include_related_objects": True,
         }
     )
 
