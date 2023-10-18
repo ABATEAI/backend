@@ -281,7 +281,7 @@ async def get_catalog_sizes():
 async def get_persuasive_message(item_name: str):
     """Get persuasive message from MakerSuite to avoid removing cart item"""
 
-    prompt = """
+    prompt = f"""
     A customer is about to remove {item_name.replace("_", " ")} from her online
     shopping cart. Persuade her to keep it in plain text.
     """
