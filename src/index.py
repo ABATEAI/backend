@@ -289,7 +289,7 @@ async def get_persuasive_message(item_name: str):
         model="models/text-bison-001",
         prompt=prompt,
         temperature=0.7,
-        max_output_tokens=150,
+        max_output_tokens=400,
     )
 
     return completion.result
