@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import google.generativeai as palm
 import os
 import tomllib
 from fastapi import FastAPI
@@ -8,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from square.client import Client
 
 description = """
-ABATE AI API reduces to increase via the Google Vertex AI and Square APIs
+ABATE AI API reduces to increase via the Google PaLM and Square APIs
 """
 
 # See https://fastapi.tiangolo.com/tutorial/metadata/
@@ -16,11 +17,11 @@ app = FastAPI(
     title="ABATEAI",
     description=description,
     summary="ABATE AI Backend Python API",
-    version="0.0.1",
+    version="0.0.2",
     contact={
         "name": "ABATE AI",
-        "url": "https://www.abateai.com/contact/",
-        "email": "support@abateai.com",
+        "url": "https://abateai.com/api/contact",
+        "email": "abateai.hackathon@gmail.com",
     },
     license_info={
         "name": "Apache 2.0",
@@ -48,6 +49,7 @@ app.add_middleware(
 square_access_token = ""
 square_environment = ""
 square_location_id = ""
+palm_api_key = ""
 
 # If CONFIG_TOML_FILE is defined, read configuration/credentials from it
 if "CONFIG_TOML_FILE" in os.environ:
@@ -61,8 +63,13 @@ if "CONFIG_TOML_FILE" in os.environ:
                 square_location_id = cfg["SQUARE_DEV"]["SQUARE_LOCATION_ID"]
             else:
                 raise RuntimeError("[index.py] SQUARE_DEV not in config.toml")
+
+            if "GOOGLE_DEV" in cfg:
+                palm_api_key = cfg["GOOGLE_DEV"]["PALM_API_KEY"]
+            else:
+                raise RuntimeError("[index.py] GOOGLE_DEV not in config.toml")
         except RuntimeError:
-            print("[index.py] Error: Unable to read SQUARE_DEV configuration")
+            print("[index.py] Error: Unable to read DEV configuration")
         except tomllib.TOMLDecodeError:
             print("[index.py] Error: config.toml is invalid")
         finally:
@@ -70,6 +77,7 @@ if "CONFIG_TOML_FILE" in os.environ:
                 not square_access_token
                 or not square_environment
                 or not square_location_id
+                or not palm_api_key
             ):
                 print("[index.py] Retrieving configuration another way...")
 
@@ -92,8 +100,20 @@ if not square_location_id:
     else:
         raise RuntimeError("[index.py] Unable to access SQUARE_LOCATION_ID")
 
+if not palm_api_key:
+    if "PALM_API_KEY" in os.environ:
+        palm_api_key = os.environ["PALM_API_KEY"]
+    else:
+        raise RuntimeError("[index.py] Unable to access PALM_API_KEY")
 
+
+palm.configure(api_key=palm_api_key)
 square_client = Client(access_token=square_access_token, environment=square_environment)
+
+
+@app.get("/api/contact")
+async def contact():
+    return {"name": "Jeffry Lew", "GitHub": "https://github.com/jeffrylew"}
 
 
 @app.get("/api/google")
