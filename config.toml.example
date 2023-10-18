@@ -10,3 +10,6 @@ SQUARE_APPLICATION_ID = "square_application_id"
 SQUARE_ENVIRONMENT = "sandbox"
 SQUARE_LOCATION_ID = "square_location_id"
 SQUARE_PAYMENT_FORM_URL = "https://sandbox.web.squarecdn.com/v1/square.js"
+
+[GOOGLE_DEV]
+PALM_API_KEY = "palm_api_key"

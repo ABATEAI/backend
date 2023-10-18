@@ -45,7 +45,7 @@ backend-abateai_api             latest      some_hash_01   1 minute ago   1.16GB
 
 ### Development
 
-ABATE AI's API builds off the Google Vertex AI API and Square APIs.
+ABATE AI's API builds off the Google MakerSuite API and Square APIs.
 The following links can be referenced during development.
 
 - Square Python SDK: https://pypi.org/project/squareup/
@@ -53,9 +53,9 @@ The following links can be referenced during development.
   https://developer.squareup.com/docs/sdks/python/quick-start
 - Square Python Payment Example:
   https://github.com/square/connect-api-examples/tree/master/connect-examples/v2/python_payment
-- Vertex AI Python SDK: https://pypi.org/project/google-cloud-aiplatform/
-- Timeseries Insights API Overview:
-  https://cloud.google.com/timeseries-insights/docs/overview
+- Google Generative AI Python Client: https://pypi.org/project/google-generativeai/
+- PaLM API Quickstart:
+  https://developers.generativeai.google/tutorials/text_quickstart
 
 The development server is started with
 
