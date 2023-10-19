@@ -288,11 +288,7 @@ async def get_persuasive_message(item_id: str):
     )
 
     if result.is_error():
-        return (
-            "Unfortunately we encountered an error: '" +
-            result.errors +
-            "' but we hope you will reconsider removing this item"
-        )
+        return result.errors
 
     item_name = result.body["related_objects"][0]["item_data"]["name"]
 
