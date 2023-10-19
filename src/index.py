@@ -17,7 +17,7 @@ app = FastAPI(
     title="ABATEAI",
     description=description,
     summary="ABATE AI Backend Python API",
-    version="0.0.2",
+    version="0.0.3",
     contact={
         "name": "ABATE AI",
         "url": "https://abateai.com/api/contact",
@@ -277,14 +277,35 @@ async def get_catalog_sizes():
         return result.errors
 
 
-@app.get("/api/google/keep/{item_name}")
-async def get_persuasive_message(item_name: str):
-    """Get persuasive message from MakerSuite to avoid removing cart item"""
+@app.get("/api/google/keep/{item_id}")
+async def get_persuasive_message(item_id: str):
+    """Get persuasive message from MakerSuite to discourage removing item"""
+
+    # Retrieve item data from Square
+    result = square_client.catalog.retrieve_catalog_object(
+        object_id = item_id,
+        include_related_objects = True,
+    )
+
+    if result.is_error():
+        return (
+            "Unfortunately we encountered an error: '" +
+            result.errors +
+            "' but we hope you will reconsider removing this item"
+        )
+
+    item_name = result.body["related_objects"][0]["item_data"]["name"]
+
+    item_variation = result.body["object"]["item_variation_data"]
+    item_size = item_variation["name"]
+    item_price = item_variation["price_money"]["amount"] / 100.0
 
     prompt = f"""
-    A customer is about to remove {item_name.replace("_", " ")} from her online
-    shopping cart. Persuade her to keep it in plain text.
+    A customer is about to remove {item_name}, {item_size} sized from her online
+    shopping cart. It costs ${item_price:.2f}. Write a persuasive message
+    to buy it within a paragraph HTML element.
     """
+
     completion = palm.generate_text(
         model="models/text-bison-001",
         prompt=prompt,
